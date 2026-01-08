@@ -36,9 +36,9 @@ document.getElementById("form").addEventListener("submit", function (e) {
     }
 
     if (!esMedioDisponible(equipo, fechaInicio, fechaFin)) {
-    alert(`❌ El medio "${equipo}" ya está reservado en ese rango de fechas`);
-    return;
-}
+        alert(`❌ El medio "${equipo}" ya está reservado en ese rango de fechas`);
+        return;
+    }
 
 
     let actual = new Date(fechaInicio + "T00:00:00");
@@ -114,10 +114,33 @@ function generarCalendario(fechaInicio, fechaFin) {
         equipos.forEach(equipo => {
             const td = document.createElement("td");
             const reserva = reservas.find(r => r.equipo === equipo && r.fecha === fechaISO);
+
+            /* Agregado */
             if (reserva) {
-                td.textContent = reserva.usuario;
                 td.classList.add("reservado");
+
+                const nombre = document.createElement("div");
+                nombre.textContent = reserva.usuario;
+
+                const btnBorrar = document.createElement("button");
+                btnBorrar.textContent = "❌";
+                btnBorrar.classList.add("btn-borrar");
+                btnBorrar.title = "Eliminar reserva";
+
+                btnBorrar.addEventListener("click", () => {
+                    borrarReserva(reserva.equipo, reserva.fecha);
+                });
+
+                td.appendChild(nombre);
+                td.appendChild(btnBorrar);
             }
+
+            /* Fin agregado */
+
+            /*  if (reserva) {
+                 td.textContent = reserva.usuario;
+                 td.classList.add("reservado");
+             } */
             tr.appendChild(td);
         });
 
@@ -155,6 +178,29 @@ function esMedioDisponible(medio, fechaInicio, fechaFin) {
     }
 
     return true;
+}
+
+function borrarReserva(equipo, fecha) {
+    if (!confirm(`¿Eliminar la reserva del ${equipo} para el día ${fecha}?`)) {
+        return;
+    }
+
+    reservas = reservas.filter(r =>
+        !(r.equipo === equipo && r.fecha === fecha)
+    );
+
+    localStorage.setItem("reservas", JSON.stringify(reservas));
+
+    // Recalcular rango del calendario
+    if (reservas.length > 0) {
+        const fechas = reservas.map(r => r.fecha);
+        const minFecha = fechas.reduce((a, b) => a < b ? a : b);
+        const maxFecha = fechas.reduce((a, b) => a > b ? a : b);
+        generarCalendario(minFecha, maxFecha);
+    } else {
+        document.getElementById("tablaDias").innerHTML = "";
+        document.getElementById("filaEquipos").innerHTML = "<th>DÍA</th>";
+    }
 }
 
 

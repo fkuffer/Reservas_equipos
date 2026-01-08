@@ -67,15 +67,17 @@
     font-weight: bold;
 }
 
-
-/* .grid-table td,
-.grid-table th {
-    height: 60px;
-    vertical-align: middle;
+.btn-borrar {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 4px;
 }
 
-.col-fija {
-    font-weight: bold;
-    background-color: #f8f9fa;
+.reservado {
+    background-color:whitesmoke;
 }
- */
+
+
+
