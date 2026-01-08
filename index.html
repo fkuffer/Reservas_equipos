@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Product App</title>
+    <!-- Bootswatch Cosmo Theme -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cosmo/bootstrap.min.css" />
+
+    <link rel="stylesheet" href="estiloDos.css">
+
+
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">RESERVAS MEDIO ELEVACION FVSA</a>
+    </nav>
+
+    <div class="container">
+        <!-- APPLICATION -->
+        <div id="App" class="row pt-2">
+            <!-- FORM -->
+            <div class="col-md-4 my-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>REALICE SU RESERVA</h4>
+                    </div>
+                    <form id="form" class="card-body">
+                        <div class="form-group">
+                            <input type="text" id="usuario" placeholder="Nombre y apellido" class="form-control" />
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" id="sector" placeholder="Sector" class="form-control" />
+                        </div>
+
+                        <div class="form-group">
+                            <select class="form-control" id="medioElevacion">
+                                <option value="">ELIJA AQUI</option>
+                                <option value="PLUMA JLG 400">PLUMA JLG 400</option>
+                                <option value="PLUMA JLG 300">PLUMA JLG 300</option>
+                                <option value="TIJERA HAULOTTE">TIJERA HAULOTTE</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="date" id="fecha-inicio" class="form-control" />
+                        </div>
+
+                        <div class="form-group">
+                            <input type="date" id="fecha-fin" class="form-control" />
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block">Ingresar datos</button>
+                        <button type="button" id="borrarDatos" class="btn btn-danger btn-block">Borrar Reservas</button>
+                        <div id="alerta" class="alert alert-danger d-none" role="alert"></div>
+
+                    </form>
+
+
+
+                </div>
+
+
+            </div>
+
+            <div class="col-md-4 mx-5">
+                <table class="table table-bordered grid-table text-center mt-4">
+                    <thead>
+                        <tr id="filaEquipos">
+                            <th>DÍA</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaDias"></tbody>
+                </table>
+            </div>
+
+
+
+
+            <!-- PRODUCTS LIST -->
+            <div id="mostrarReserva" class="col-md-8 my-1"></div>
+            <div id="muestra" class="col-md-8 my-1"></div>
+        </div>
+        <p class="errorDos" id="muestraError"></p>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.1/xlsx.full.min.js"></script>
+
+        <script src="fechasDos.js"></script>
+</body>
+
+</html>
